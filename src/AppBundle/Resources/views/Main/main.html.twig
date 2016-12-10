@@ -1,0 +1,11 @@
+
+<div>
+    <a href="{{ path("app_contact_add") }}">dodaj kontakt</a>
+</div>
+<hr>
+{% for contact in contacts %}
+<p>{{ contact.name }} {{ contact.surname }}</p>
+<a href="{{ path("app_contact_show",{"id":contact.id}) }}">zobacz</a>
+    <hr>
+
+{% endfor %}
