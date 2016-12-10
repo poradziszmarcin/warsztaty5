@@ -50,4 +50,28 @@ class ContactController extends Controller
 
         return ["form" =>$form->createView()];
     }
+
+    /**
+     * @Route("/edit/{id}")
+     * @Template()
+     */
+    public function editAction(Request $request, $id)
+    {
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")->find($id);
+
+        if ($contact == false)
+        {
+            throw $this->createNotFoundException("nie ma takiego kontaktu");
+        }
+
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute("app_contact_show",["id"=>$contact->getId()]);
+        }
+        return ["form"=>$form->createView()];
+    }
 }
