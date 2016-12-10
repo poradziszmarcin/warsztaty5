@@ -1,9 +1,13 @@
 <div>
     <a href="{{ path("app_main_main") }}">strona główna</a>
-    //
+    // //
     <a href="{{ path("app_contact_edit",{"id":contact.id}) }}">edytuj kontakt</a>
-    //
+    // //
     <a href="{{ path("app_address_add",{"id":contact.id}) }}">dodaj adres</a>
+    // //
+    <a href="{{ path("app_email_add",{"id":contact.id}) }}">dodaj email</a>
+    // //
+    <a href="{{ path("app_phone_add",{"id":contact.id}) }}">dodaj numer telefonu</a>
 
 </div>
 <hr>
@@ -17,20 +21,52 @@
     <h3>Adresy:</h3>
 
     {% for address in contact.addresses %}
-        <a href ="{{ path("app_address_edit",{"id":address.id, "cid":contact.id}) }}">edytuj adres</a>
-        //
-        <a href ="{{ path("app_address_remove",{"id":address.id, "cid":contact.id}) }}">usun adres</a>
-
 
         <p>Miasto: {{ address.city }}</p>
         <p>Kod: {{ address.code }}</p>
         <p>Ulica: {{ address.street }}</p>
         <p>Numer: {{ address.number }}</p>
+        <a href="{{ path("app_address_edit",{"id":address.id, "cid":contact.id}) }}">edytuj adres</a>
+        //
+        <a href="{{ path("app_address_remove",{"id":address.id, "cid":contact.id}) }}">usun adres</a>
         <br>
+        <p>-------------------------------------</p>
 
     {% else %}
-
         <p>nie ma jeszcze dodanych adresów</p>
     {% endfor %}
+
+    <h3>Emaile:</h3>
+
+    {% for email in contact.emails %}
+        <p>{{ email.email }}</p>
+        <a href="{{ path("app_email_edit",{"id":email.id, "cid":contact.id}) }}">edytuj adres</a>
+        //
+        <a href="{{ path("app_email_remove",{"id":email.id, "cid":contact.id}) }}">usun adres</a>
+        <br>
+        <p>-------------------------------------</p>
+
+
+    {% else %}
+        <p>nie ma jeszcze dodanych adresów email</p>
+    {% endfor %}
+
+    <h3>Numery telefonu</h3>
+
+    {% for phone in contact.phones %}
+        <p>Numer:{{ phone.number }}</p>
+        <p>Opis:{{ phone.type }}</p>
+        <a href="{{ path("app_phone_edit",{"id":phone.id, "cid":contact.id}) }}">edytuj numer</a>
+        //
+        <a href="{{ path("app_phone_remove",{"id":phone.id, "cid":contact.id}) }}">usun numer</a>
+        <br>
+        <p>-------------------------------------</p>
+
+
+    {% else %}
+        <p>nie ma jeszcze dodanych numerów telefonu</p>
+    {% endfor %}
+
+
 
 </div>
