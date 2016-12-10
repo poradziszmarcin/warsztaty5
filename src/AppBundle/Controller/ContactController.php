@@ -74,4 +74,23 @@ class ContactController extends Controller
         }
         return ["form"=>$form->createView()];
     }
+
+    /**
+     * @param $id
+     * @Route("/remove/{id}")
+     */
+    public function removeAction($id)
+    {
+        $contact = $this->getDoctrine()->getRepository("AppBundle:Contact")->find($id);
+
+        if ($contact == false)
+        {
+            throw $this->createNotFoundException("nie znaleziono kontaktu");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($contact);
+        $em->flush();
+        return $this->redirectToRoute("app_main_main");
+    }
 }
