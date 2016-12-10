@@ -1,4 +1,6 @@
 <div>
+    <a href="{{ path("app_main_main") }}">strona główna</a>
+    //
     <a href="{{ path("app_contact_edit",{"id":contact.id}) }}">edytuj kontakt</a>
     //
     <a href="{{ path("app_address_add",{"id":contact.id}) }}">dodaj adres</a>
@@ -15,7 +17,9 @@
     <h3>Adresy:</h3>
 
     {% for address in contact.addresses %}
-        <a href ="{{ path("app_address_edit",{"id":address.id, "cid":contact.id}) }}">edytuj kontakt</a>
+        <a href ="{{ path("app_address_edit",{"id":address.id, "cid":contact.id}) }}">edytuj adres</a>
+        //
+        <a href ="{{ path("app_address_remove",{"id":address.id, "cid":contact.id}) }}">usun adres</a>
 
 
         <p>Miasto: {{ address.city }}</p>

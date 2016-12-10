@@ -70,4 +70,25 @@ class AddressController extends Controller
 
         return ["form"=>$form->createView()];
     }
+
+
+    /**
+     * @param $id
+     * @Route("/remove/{id}{cid}")
+     */
+    public function removeAction($id,$cid)
+    {
+        $address = $this->getDoctrine()->getRepository("AppBundle:Address")->find($id);
+
+        if ($address == false)
+        {
+            throw $this->createNotFoundException("nie ma takiego adresu");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($address);
+        $em->flush();
+
+        return $this->redirectToRoute("app_contact_show",["id"=>$cid]);
+    }
 }
